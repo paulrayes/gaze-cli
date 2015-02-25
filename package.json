@@ -1,0 +1,26 @@
+{
+  "name": "gaze-cli",
+  "version": "0.1.0",
+  "description": "Command line interface for the gaze watcher",
+  "main": "index.js",
+  "repository": "https://github.com/paulrayes/gaze-cli.git",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "jshint *.js --show-non-errors",
+    "watch": "gaze 'jshint \\$path --show-non-errors' '*.js'"
+  },
+  "bin": {
+    "gaze": "./index.js"
+  },
+  "author": "Paul Rayes <pjoerayes@live.com>",
+  "license": "MIT",
+  "dependencies": {
+    "exec-sh": "^0.2.0",
+    "gaze": "^0.5.1",
+    "pretty-hrtime": "^1.0.0",
+    "yargs": "^3.3.1"
+  },
+  "devDependencies": {
+    "jshint": "^2.6.0"
+  }
+}
