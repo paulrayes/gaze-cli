@@ -1,6 +1,10 @@
 gaze-cli
 ========
 
+[![NPM](https://nodei.co/npm/gaze-cli.png?compact=true)](https://nodei.co/npm/gaze-cli/)
+
+[![Dependency Status](https://david-dm.org/paulrayes/gaze-cli.svg)](https://david-dm.org/paulrayes/gaze-cli/)
+
 CLI wrapper for the gaze file watcher. Watches files for changes, including renamed or new files, and runs a command. Can pass the filename into the command to prevent unnecessary work.
 
 Install
