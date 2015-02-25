@@ -36,7 +36,7 @@ Run `gaze --help` for a full list of options.
       --ignore-rename  Ignore when a file is renamed
 
     Examples:
-      gaze "jshint \$path" "lib/**/*.js"    Runs jshint when a js file in the lib folder changes
+      gaze "jshint $path" "lib/**/*.js"    Runs jshint when a js file in the lib folder changes
 
 License
 -------

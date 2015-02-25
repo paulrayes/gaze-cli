@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "jshint *.js --show-non-errors",
-    "watch": "gaze 'jshint \\$path --show-non-errors' '*.js'"
+    "watch": "gaze 'jshint $path --show-non-errors' '*.js'"
   },
   "bin": {
     "gaze": "./index.js"
