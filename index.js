@@ -26,6 +26,10 @@ yargs
 	.option('ignore-rename', {
 		describe: 'Ignore when a file is renamed',
 		type: 'boolean'
+	})
+	.option('multiple', {
+		describe: 'Pattern is multiple comma separated patterns',
+		type: 'boolean'
 	});
 
 var argv = yargs.argv;
@@ -47,7 +51,7 @@ if (argv._.length !== 2) {
 }
 
 var command = argv._[0];
-var pattern = argv._[1];
+var pattern = argv.multiple ? [].concat(argv._[1].split(',')) : argv._[1];
 
 // Start the file watcher on the pattern
 gaze(pattern, function(err, watcher) {
