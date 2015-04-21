@@ -34,6 +34,7 @@ Run `gaze --help` for a full list of options.
       --help           Print this help message
       --silent         Do not print messages
       --ignore-rename  Ignore when a file is renamed
+      --multiple       Pattern is multiple comma separated patterns
 
     Examples:
       gaze "jshint $path" "lib/**/*.js"    Runs jshint when a js file in the lib folder changes
