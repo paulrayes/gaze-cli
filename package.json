@@ -1,13 +1,13 @@
 {
   "name": "gaze-cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Command line interface for the gaze watcher",
   "main": "index.js",
   "repository": "https://github.com/paulrayes/gaze-cli.git",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "jshint *.js --show-non-errors",
-    "watch": "gaze 'jshint $path --show-non-errors' '*.js'"
+    "watch": "./index.js 'jshint $path --show-non-errors' '*.js'"
   },
   "bin": {
     "gaze": "./index.js"

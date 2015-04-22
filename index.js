@@ -10,7 +10,8 @@ var prettyHrtime = require('pretty-hrtime'); // Format elapsed times nicely
 // Define our command line arguments and help stuff
 yargs
 	.usage('Usage: gaze <command> <pattern> ...\n\nIf present, the string $path in <command> will be replaced by the full path to the file that changed.')
-	.example('gaze "jshint $path" lib/**/*.js', 'Runs jshint when a js file in the lib folder changes')
+	.example('gaze "jshint $path" "lib/**/*.js"', 'Runs jshint when a js file in the lib folder changes')
+	.example('gaze "jshint $path" "**/*.js" "!node_modules/**/*"', 'Runs jshint when a js file anywhere except in node_modules changes')
 	.option('version', {
 		describe: 'Show version number',
 		type: 'boolean'
@@ -41,13 +42,13 @@ if (argv.version) {
 }
 
 // Ensure we have the proper arguments
-if (argv._.length !== 2) {
-	console.log('You must provide a single command and pattern');
+if (argv._.length < 2) {
+	console.log('You must provide a single command and at least one pattern');
 	return;
 }
 
 var command = argv._[0];
-var pattern = argv._[1];
+var pattern = argv._.slice(1, argv._.length);
 
 // Start the file watcher on the pattern
 gaze(pattern, function(err, watcher) {
@@ -55,7 +56,14 @@ gaze(pattern, function(err, watcher) {
 		throw err;
 	}
 	if (!argv.silent) {
-		console.log('Watching for changes to: ', pattern);
+		var fileCount = 0;
+		Object.keys(watcher._watched).forEach(function(watched) {
+			fileCount = fileCount + watcher._watched[watched].length;
+		});
+		console.log('Watching ' + fileCount + ' files/directories, pattern: ', pattern);
+		if (fileCount > 10000) {
+			console.log('This is a lot of files, for better performance you should reduce it.');
+		}
 	}
 	watcher.on('changed', function(filepath) {
 		run(filepath);
