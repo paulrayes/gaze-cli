@@ -2,6 +2,7 @@
 
 'use strict';
 
+var path = require('path');
 var yargs = require('yargs'); // Parses arguments and displays help message
 var gaze = require('gaze'); // Watches for file changes
 var execshell = require('exec-sh'); // Runs commands just like npm scripts
@@ -10,8 +11,8 @@ var prettyHrtime = require('pretty-hrtime'); // Format elapsed times nicely
 // Define our command line arguments and help stuff
 yargs
 	.usage('Usage: gaze <command> <pattern> ...\n\nIf present, the string $path in <command> will be replaced by the full path to the file that changed.')
-	.example('gaze "jshint $path" "lib/**/*.js"', 'Runs jshint when a js file in the lib folder changes')
-	.example('gaze "jshint $path" "**/*.js" "!node_modules/**/*"', 'Runs jshint when a js file anywhere except in node_modules changes')
+	.example('gaze "jshint \$path" "lib/**/*.js"', 'Runs jshint when a js file in the lib folder changes')
+	.example('gaze "jshint \$path" "**/*.js" "!node_modules/**/*"', 'Runs jshint when a js file anywhere except in node_modules changes')
 	.option('version', {
 		describe: 'Show version number',
 		type: 'boolean'
@@ -81,7 +82,9 @@ gaze(pattern, function(err, watcher) {
 // Function to run when something changes
 function run(filepath) {
 	var startTime = process.hrtime();
-	var uniqueCommand = command.replace('$path', filepath);
+	var uniqueCommand = command.replace(/\$path/g, filepath);
+	uniqueCommand = uniqueCommand.replace(/\$dirname/g, path.dirname(filepath));
+	uniqueCommand = uniqueCommand.replace(/\$basename/g, path.basename(filepath));
 	if (!argv.silent) {
 		console.log('>', uniqueCommand);
 	}
