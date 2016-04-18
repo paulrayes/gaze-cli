@@ -26,7 +26,7 @@ Run `gaze --help` for a full list of options.
     $ gaze --help
     Usage: gaze <command> <pattern> ...
 
-    If present, the string $path in <command> will be replaced by the full path to
+    If present, the string $path, $dirname or $basename in <command> will be replaced by the full path, the directory path or the file basename to
     the file that changed.
 
     Options:
@@ -36,8 +36,8 @@ Run `gaze --help` for a full list of options.
       --ignore-rename  Ignore when a file is renamed
 
     Examples:
-      gaze "jshint $path" "lib/**/*.js"    Runs jshint when a js file in the lib folder changes
-      gaze "jshint $path" "**/*.js" "!node_modules/**/*"    Runs jshint when any js file that is not in node_modules changes
+      gaze "jshint \$path" "lib/**/*.js"    Runs jshint when a js file in the lib folder changes
+      gaze "jshint \$path" "**/*.js" "!node_modules/**/*"    Runs jshint when any js file that is not in node_modules changes
 
 Tips
 ----
